@@ -4,6 +4,9 @@
 int ENA = 6;
 int ENB = 5;
 const int in[4] = {7,8,3,4}; 
+// status 
+bool finish = false;
+bool check = false;
 
 // line sensor
 int s1 = A1; int l1;
@@ -45,6 +48,10 @@ void loop()
 void MotorControl()
 {
   if()
+  if(l1 == 1 && l2 == 1 && l3 == 1 && l4 == 1 && l5 == 1)
+  {
+    if   
+  }
 }
 
 
@@ -55,19 +62,48 @@ void errorCalculation(){
   l3 = digitalRead(s3);
   l4 = digitalRead(s4);
   l5 = digitalRead(s5);
-  if (l5 == 1 &&l4 == 1 &&l3 == 1 &&l2 == 1 &&l1 == 0){error =4;} //1
-  if (l5 == 1 &&l4 == 1 &&l3 == 1 &&l2 == 0 &&l1 == 0){error =3;} //2
-  if (l5 == 1 &&l4 == 1 &&l3 == 1 &&l2 == 0 &&l1 == 1){error =2;} //3
-  if (l5 == 1 &&l4 == 1 &&l3 == 0 &&l2 == 0 &&l1 == 1){error =1;} //4
-  if (l5 == 1 &&l4 == 1 &&l3 == 0 &&l2 == 1 &&l1 == 1){error =0;} //5
-  if (l5 == 1 &&l4 == 0 &&l3 == 0 &&l2 == 1 &&l1 == 1){error =-1;} //6
-  if (l5 == 1 &&l4 == 0 &&l3 == 1 &&l2 == 1 &&l1 == 1){error =-2;} //7
-  if (l5 == 0 &&l4 == 0 &&l3 == 1 &&l2 == 1 &&l1 == 1){error =-3;} //8
-  if (l5 == 0 &&l4 == 1 &&l3 == 1 &&l2 == 1 &&l1 == 1){error =-4;} //9
-  if (l5 == 0 &&l4 == 0 &&l3 == 0 &&l2 == 0 &&l1 == 0){error =-5;} //10
-
-//Serial.print(l1);Serial.print("  ");Serial.print(l2);Serial.print("  ");Serial.print(l3);Serial.print("  ");
-//Serial.print(l4);Serial.print("  "); Serial.print(l5);Serial.println("  ");Serial.print("error");Serial.print(error);Serial.println("  ");Serial.println("  ");
+  // vào khu vực dò tường
+  if(l1 == 0 && l2 == 0 && l3 == 0 && l4 == 0 &&l5 == 0 )
+  {
+    error = ;
+  }
+  // dò line
+  if(l1 == 0 && l2 == 0 && l3 == 0 && l4 == 0 && l5 == 1 )
+  {
+    error = 4;
+  }
+  if(l1 == 0 && l2 == 0 && l3 == 0 && l4 == 1 && l5 == 1)
+  {
+    error = 3;
+  }
+  if(l1 == 0 && l2 == 0 && l3 == 0 && l4 == 1 && l5 == 0 )
+  {
+    error = 2;
+  }
+  if(l1 == 0 && l2 == 0 && l3 == 1 && l4 == 1 && l5 == 0 )
+  {
+    error = 1;
+  }
+  if(l1 == 0 && l2 == 0 && l3 == 1 && l4 == 0 && l5 == 0 )
+  {
+    error = 0;
+  }
+  if(l1 == 0 && l2 == 1 && l3 == 1 && l4 == 0 && l5 == 0 )
+  {
+    error = -1;
+  }
+  if(l1 == 0 && l2 == 1 && l3 == 0 && l4 == 0 && l5 == 0 )
+  {
+    error = -2;
+  }
+  if(l1 == 1 && l2 == 1 && l3 == 0 && l4 == 0 && l5 == 0 )
+  {
+    error = -3;
+  }
+  if(l1 == 1 && l2 == 0 && l3 == 0 && l4 == 0 && l5 == 0 )
+  {
+    error = -4;
+  }
 }
 
 void pid_calculation(){

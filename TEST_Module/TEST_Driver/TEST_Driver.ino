@@ -14,7 +14,7 @@ int demphai = 0;
 char ena = 6 , enb = 5; 
 char in[4] = {7,8,3,4};
 int left_motor_speed;
-int initial_motor_speed = 100;
+int initial_motor_speed = 120;
 int right_motor_speed;
 
 
@@ -35,7 +35,7 @@ char trig;
 // error value and PID
 int error;
 int previous_error = 0;
-int P; int Kp = 25;
+int P; int Kp = 27;
 int I; int Ki = 0;
 int D; int Kd = 17;
 int PID_value;
@@ -119,6 +119,8 @@ void errorCalculation()
         if(check == true)
         {
           rephai90();
+          robot_dung();
+          delay(500);
         }
     }
     else
@@ -138,7 +140,7 @@ void errorCalculation()
       if(demngan == 1 || demngan == 2)
       {
         robot_dung();
-        delay(200);
+        delay(500);
         robot_dithang();
       }
       
@@ -155,6 +157,8 @@ void errorCalculation()
         if(demtrai )
         {
             retrai90();
+                      robot_dung();
+          delay(500);
         }
     }
 
@@ -209,12 +213,12 @@ void rephai90()
   // robot_dung();
   // delay(500);
   robot_dithang();
-  delay(50);
-  // robot_dung();
-  // delay(500);
+  delay(360);
+  robot_dung();
+  delay(500);
  
   robot_rephai();
-  delay(390);
+  delay(550);
 }
 void retrai90()
 {
@@ -225,12 +229,12 @@ void retrai90()
   // robot_dung();
   // delay(450);
   robot_dithang();
-  delay(50);
-  // robot_dung();
-  // delay(500);
+  delay(360);
+  robot_dung();
+  delay(500);
  
   robot_retrai();
-  delay(390);
+  delay(550);
 }
 
 

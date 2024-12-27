@@ -19,12 +19,12 @@ int s5 = A5; int l5;
 // PID
 // error value and PID
 int error; int previous_error = 0;
-int P; int Kp = 12;
-int I; int Ki = 10;
+int P; int Kp = 8;
+int I; int Ki = 0;
 int D; int Kd =10;
 int PID_value;
 
-int left_motor_speed(0,255); int initial_motor_speed = 150;
+int left_motor_speed(0,255); int initial_motor_speed = 100;
 int right_motor_speed(0,255);
 
 
@@ -47,64 +47,97 @@ void loop()
 
 void MotorControl()
 {
-  if()
-  if(l1 == 1 && l2 == 1 && l3 == 1 && l4 == 1 && l5 == 1)
-  {
-    if   
-  }
+    if(error == 0)
+    {
+        robot_dithang();
+    }
+    if(error < 0)
+    {
+        robot_retrai();
+    }
+    if(error > 0)
+    {
+        robot_rephai();
+    }
 }
 
 
 //calculation error by sensor detech situation
-void errorCalculation(){
-  l1 = digitalRead(s1);
-  l2 = digitalRead(s2);
-  l3 = digitalRead(s3);
-  l4 = digitalRead(s4);
-  l5 = digitalRead(s5);
-  // vào khu vực dò tường
-  if(l1 == 0 && l2 == 0 && l3 == 0 && l4 == 0 &&l5 == 0 )
-  {
-    error = ;
-  }
-  // dò line
-  if(l1 == 0 && l2 == 0 && l3 == 0 && l4 == 0 && l5 == 1 )
-  {
-    error = 4;
-  }
-  if(l1 == 0 && l2 == 0 && l3 == 0 && l4 == 1 && l5 == 1)
-  {
-    error = 3;
-  }
-  if(l1 == 0 && l2 == 0 && l3 == 0 && l4 == 1 && l5 == 0 )
-  {
-    error = 2;
-  }
-  if(l1 == 0 && l2 == 0 && l3 == 1 && l4 == 1 && l5 == 0 )
-  {
-    error = 1;
-  }
-  if(l1 == 0 && l2 == 0 && l3 == 1 && l4 == 0 && l5 == 0 )
-  {
-    error = 0;
-  }
-  if(l1 == 0 && l2 == 1 && l3 == 1 && l4 == 0 && l5 == 0 )
-  {
-    error = -1;
-  }
-  if(l1 == 0 && l2 == 1 && l3 == 0 && l4 == 0 && l5 == 0 )
-  {
-    error = -2;
-  }
-  if(l1 == 1 && l2 == 1 && l3 == 0 && l4 == 0 && l5 == 0 )
-  {
-    error = -3;
-  }
-  if(l1 == 1 && l2 == 0 && l3 == 0 && l4 == 0 && l5 == 0 )
-  {
-    error = -4;
-  }
+void errorCalculation()
+{
+    l1 = digitalRead(s1);
+    l2 = digitalRead(s2);
+    l3 = digitalRead(s3);
+    l4 = digitalRead(s4);
+    l5 = digitalRead(s5);
+    // vào khu vực dò tường
+    if (l1 == W && l2 == W && l3 == W && l4 == W && l5 == W)
+    {
+        // initial_motor_speed = 150;
+      robot_dung();
+    }
+    // dò line
+    if (l1 == W && l2 == W && l3 == W && l4 == W && l5 == B)
+    {
+        error = 3;
+    }
+    if (l1 == W && l2 == W && l3 == W && l4 == B && l5 == W)
+    {
+        error = 2;
+    }
+    if (l1 == W && l2 == W && l3 == B && l4 == B && l5 == W)
+    {
+        error = 1;
+    }
+    if (l1 ==  W && l2 == 0 && l3 == B && l4 == W && l5 == W)
+    {
+        error = 0;
+    }
+    if (l1 == W && l2 == B && l3 == B && l4 == W && l5 == W)
+    {
+        error = -1;
+    }
+    if (l1 == W && l2 == B && l3 == W && l4 == W && l5 == W)
+    {
+        error = -2;
+    }
+    if (l1 == B && l2 == W && l3 == W && l4 == W && l5 == W)
+    {
+        error = -3;
+    }
+
+    // dieu huong goc vuong - re phai
+    //       0          0          1          1          1
+    if(l1 == W && l2 == W && l3 == B && l4 == B && l5 == B
+    || l1 == W && l2 == W && l3 == W && l4 == B && l5 == B)
+    {
+        demphai++;
+        if(demphai )
+        {
+            rephai90();
+        }
+    }
+    // full line
+    if(l1 == 1 && l2 == 1 && l3 == 1 && l4 == 1 && l5 == 1
+    || l1 == 1 && l2 == 1 && l3 == 1 && l4 == 1 && l5 == 0
+    || l1 == 0 && l2 == 1 && l3 == 1 && l4 == 1 && l5 == 0
+    || l1 == 0 && l2 == 1 && l3 == 1 && l4 == 1 && l5 == 1)
+    {
+    //     if(check == true)
+    //     {
+    // 
+    }       
+    if(l1 == B && l2 == B && l3 == B && l4 == W && l5 == W
+    || l1 == B && l2 == B && l3 == W && l4 == W && l5 == W)
+    {
+        demphai++;
+        if(demphai )
+        {
+            retrai90();
+        }
+    }
 }
+
 
 void pid_calculation(){
   P = error;
